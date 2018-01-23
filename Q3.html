@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoList</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+  #todolist {
+    font-size: 2em;
+  }
+</style>  
+<body>
+  <div class="container">
+    <div>
+      <div class="form-group">
+        <input type="text" id="input" class="form-control" placeholder="輸入待辦事項">  
+        <button onclick="createToDo()" class="form-control btn btn-primary"> + </button>
+      </div>
+      
+
+      <div id="todolist" class="text-center">
+      </div>
+      
+    </div>
+  </div>
+  
+</body>
+
+<script>
+  
+  function createToDo(){
+    let todo = document.createElement("div");
+    let span = document.createElement("span");
+    let input = document.getElementById("input").value;
+
+    if(input == ""){
+      input = "nothing here"
+    }
+
+    span.innerHTML = input;
+
+    todo.appendChild(span);
+
+    let replaceButton = document.createElement("button");
+    replaceButton.onclick = function() {
+      let input = document.getElementById("input").value;
+      if(input == ""){
+        alert("沒有輸入文字");
+        return;
+      }
+      this.parentNode.firstChild.innerHTML = input;
+      document.getElementById("input").value = "";
+    }
+
+    replaceButton.textContent = "R";
+    todo.appendChild(replaceButton);
+
+    let removeButton = document.createElement("button");
+
+    removeButton.onclick = function() {
+      let con = confirm("確定刪除？");
+      if (con){
+        this.parentNode.parentNode.removeChild(this.parentNode);
+      }else{
+        return
+      }
+      
+    }
+
+    removeButton.textContent = "V";
+    todo.appendChild(removeButton);
+
+    document.getElementById("todolist").appendChild(todo);
+    document.getElementById("input").value = "";
+  }
+  
+</script>
+</html>
