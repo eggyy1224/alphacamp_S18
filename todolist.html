@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div>
+    <input type="text" id="input">  
+    <button onclick="createToDo()"> + </button>
+
+    <div id="todolist" >
+    </div>
+    
+  </div>
+</body>
+
+<script>
+  
+  function createToDo(){
+    let todo = document.createElement("div");
+    let span = document.createElement("span");
+    let input = document.getElementById("input").value;
+
+    if(input == ""){
+      input = "nothing here"
+    }
+
+    span.innerHTML = input;
+
+    todo.appendChild(span);
+
+    let replaceButton = document.createElement("button");
+    replaceButton.onclick = function() {
+      let input = document.getElementById("input").value;
+      if(input == ""){
+        alert("沒有輸入文字");
+        return;
+      }
+      this.parentNode.firstChild.innerHTML = input;
+      document.getElementById("input").value = "";
+    }
+
+    replaceButton.textContent = "R";
+    todo.appendChild(replaceButton);
+
+    let removeButton = document.createElement("button");
+
+    removeButton.onclick = function() {
+      this.parentNode.parentNode.removeChild(this.parentNode);
+    }
+
+    removeButton.textContent = "V";
+    todo.appendChild(removeButton);
+
+    document.getElementById("todolist").appendChild(todo);
+    document.getElementById("input").value = "";
+  }
+  
+</script>
+</html>

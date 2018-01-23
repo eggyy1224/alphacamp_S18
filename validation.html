@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ID validation</title>
+</head>
+<body>
+  <form>
+    <input type="text" id='nric'>
+    <input type="button" value="驗證" id="button">
+    <p id="result">123</p>
+  </form>
+</body>
+<script>
+  let button = document.getElementById("button");
+  
+  function validation(){
+    let code = document.getElementById("nric").value
+    if (code == "") {
+      alert("不能為空");
+    }else if (!isNaN(code)){
+      alert("內容不能全部是數字");
+    }else if (code.length != 10) {
+      alert("長度不正確");
+    }else {
+      document.getElementById("result").innerHTML = "通過驗證" ;
+    }
+  }
+  button.addEventListener("click", validation);
+</script>
+</html>

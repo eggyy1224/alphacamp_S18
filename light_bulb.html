@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>light bulb</title>
+  <style>
+    #image {
+      width: 800px;
+      height: 800px;
+    }
+  </style>
+<body>
+  <img src="https://lh4.googleusercontent.com/EUQHNI3MENcVOa61QcmEA5IsjOi_SiaVt7T0LwRApuP2wG9l-pSoTvyFUguI_3Nwor7vgUFYOKWQpbWcKHFH=w2880-h1400-rw" id='image'>
+  <div class='div' id='timer'></div>
+
+  <button class="button" id="button2">ON<br>-<br>OFF</button>
+</body>
+<script>
+    let state = true;
+    function toggleLight(){
+      let image = document.getElementById("image");
+      state = !state;
+      image.src = state ? "https://lh4.googleusercontent.com/EUQHNI3MENcVOa61QcmEA5IsjOi_SiaVt7T0LwRApuP2wG9l-pSoTvyFUguI_3Nwor7vgUFYOKWQpbWcKHFH=w2880-h1400-rw" : "https://lh4.googleusercontent.com/Iffn8zkIneivwadF4q1uObReRYDGjOARhdA_J2DhgDiii8Zq5WBgK3QERowaTmdmIa034ykI9gFmv2efFuQ9=w2880-h1400-rw" ;
+    }
+
+    let button = document.getElementById("button2");
+    console.log(button);
+    button.addEventListener("click", toggleLight);
+
+    let timeLeft = 5;
+    function countDownTimer(){
+
+      timeLeft -= 1;
+      if (timeLeft <= 0) {
+        console.log(state)
+        image.src = "https://lh4.googleusercontent.com/Iffn8zkIneivwadF4q1uObReRYDGjOARhdA_J2DhgDiii8Zq5WBgK3QERowaTmdmIa034ykI9gFmv2efFuQ9=w2880-h1400-rw";
+        clearInterval(id);
+      }
+      document.getElementById('timer').innerHTML = timeLeft;
+    }
+
+    let id = setInterval(countDownTimer, 1000)
+
+    
+  </script>
+</head>
+</html>
