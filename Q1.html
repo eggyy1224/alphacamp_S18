@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>light bulb</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
+  <style>
+      #image {
+      width: 600px;
+      height: 600px;
+    }
+
+    .div {
+      width:300px;
+      height:300px;
+      background: gray;
+      font-size: 10em;
+      margin-bottom: 50px;
+    }
+
+    .form {
+      margin:20px;
+    }
+
+    #button2 {
+      margin-left: 120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="img/on.jpg" id='image'>
+      </div>
+      <div class="col-md-4">
+
+        <div class="form">
+          <input type="text" id='input' class="form-control" placeholder="輸入倒數計時的時間">
+          <button class='btn btn-primary' id='button'>送出</button>
+        </div>
+        <br>
+        <br>
+        <div class='div text-center' id='timer' ></div>
+
+        <button class="btn btn-primary text-center" id="button2">ON<br>-<br>OFF</button>
+      </div>
+    </div> 
+  </div>
+  
+</body>
+<script>
+    let state = true;
+    function toggleLight(){
+      let image = document.getElementById("image");
+      state = !state;
+      image.src = state ? "img/on.jpg" : "img/off.jpg" ;
+    }
+
+    let button = document.getElementById("button2");
+    console.log(button);
+    button.addEventListener("click", toggleLight);
+
+    let timerButton = document.getElementById("button"); 
+    
+    let timerActivate = function(){
+      let input = document.getElementById("input").value
+      if (isNaN(input)){
+        alert("please enter a number");
+        return;
+      }
+      let timeLeft = input;
+      function countDownTimer(){
+
+        timeLeft -= 1;
+        if (timeLeft <= 0) {
+          image.src = "img/off.jpg";
+          clearInterval(id);
+        }
+        document.getElementById('timer').innerHTML = timeLeft;
+      }
+
+      let id = setInterval(countDownTimer, 1000);
+      document.getElementById("input").value = ''
+    }
+
+    timerButton.onclick = timerActivate;
+
+    
+
+    
+  </script>
+
+</html>
