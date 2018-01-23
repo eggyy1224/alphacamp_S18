@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ID validation</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    .custom {
+      margin:200px;
+    }
+
+    #result {
+      border: 1px black solid;
+      margin-top: 50px;
+      font-size: 3em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">身分證驗證</h1>
+    <div class="custom">
+      <form class="form-group">
+        <input type="text" id='nric' class="form-control" placeholder="輸入你的身分證字號">
+        <br> 
+        <input type="button" value="驗證" id="button" class="form-control btn btn-primary">
+        <p id="result" class="text-center">123</p>
+      </form>
+    </div>
+    
+  </div>
+  
+</body>
+<script>
+  let button = document.getElementById("button");
+  
+  function validation(){
+    let code = document.getElementById("nric").value
+    if (code == "") {
+      alert("不能為空");
+    }else if (!isNaN(code)){
+      alert("內容不能全部是數字");
+    }else if (code.length != 10) {
+      alert("長度不正確");
+    }else if(code[1] == '1'){
+      document.getElementById("result").innerHTML = "某男通過驗證" ;
+    }else {
+      document.getElementById("result").innerHTML = "某女通過驗證" ;
+    }
+  }
+  button.addEventListener("click", validation);
+</script>
+</html>
