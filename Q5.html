@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoList</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+  #todolist {
+    font-size: 2em;
+  }
+</style>  
+<body>
+  <div class="container">
+    <div>
+      <div class="form-group">
+        <input type="text" id="input" class="form-control" placeholder="輸入待辦事項">  
+        <button onclick="createToDo()" class="form-control btn btn-primary"> + </button>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" id="emer" data-toggle="button"> 緊急
+          </label>
+          <label class="btn btn-secondary active">
+          
+            <input type="radio" id="notemer" checked>非緊急
+          </label>
+        </div>
+          
+          
+        </label>
+        
+        
+      </div>
+      
+
+      <div id="todolist" class="text-center">
+      </div>
+      
+    </div>
+    
+  
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+<script>
+  
+
+  function createToDo(){
+    let todo = document.createElement("div");
+    let span = document.createElement("span");
+    let input = document.getElementById("input").value;
+    let emer = document.getElementById("emer");
+    let notemer = document.getElementById("notemer");
+
+    if(input == ""){
+      input = "nothing here";
+    }
+
+    span.innerHTML = input;
+    if(emer.checked){
+      todo.style.color = "red";
+      emer.checked = false;
+    }else if (notemer.checked){
+      todo.style.color = "green";
+      notemer.checked = false;
+    }
+    todo.appendChild(span);
+
+    let replaceButton = document.createElement("button");
+    replaceButton.onclick = function() {
+      let input = document.getElementById("input").value;
+      if(input == ""){
+        alert("沒有輸入文字");
+        return;
+      }
+      this.parentNode.firstChild.innerHTML = input;
+      document.getElementById("input").value = "";
+    }
+
+    replaceButton.textContent = "R";
+    todo.appendChild(replaceButton);
+
+    let removeButton = document.createElement("button");
+
+    removeButton.onclick = function() {
+      let con = confirm("確定刪除？");
+      if (con){
+        
+        this.parentNode.style.color = "gray";
+        
+        this.parentNode.removeChild(this.parentNode.childNodes[1]);
+        this.parentNode.removeChild(this);
+        
+
+      }else{
+        return
+      }
+      
+    }
+
+    removeButton.textContent = "V";
+    todo.appendChild(removeButton);
+
+    document.getElementById("todolist").appendChild(todo);
+    document.getElementById("input").value = "";
+  }
+
+
+
+
+  
+</script>
+</html>
